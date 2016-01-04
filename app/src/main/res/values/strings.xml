@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Mweather</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="location_placeholder">Finding location</string>
+    <string name="add_delete_city">Add/Delete city(s)</string>
+
+</resources>

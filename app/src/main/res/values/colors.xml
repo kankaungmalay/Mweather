@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#03a9f4</color>
+    <color name="colorPrimaryDark">#0288d1</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="toolBarColor">#09c</color>
+
+    <!-- basic colors -->
+    <color name="gGreen">#3cba54</color>
+    <color name="gBlue">#4885ed</color>
+    <color name="gYellow">#f4c20d</color>
+    <color name="gRed">#db3236</color>
+</resources>
