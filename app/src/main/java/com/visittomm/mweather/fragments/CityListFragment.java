@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.visittomm.mweather.R;
 import com.visittomm.mweather.interfaces.FragmentListener;
-import com.visittomm.mweather.models.Country;
+import com.visittomm.mweather.models.City;
 import com.visittomm.mweather.models.SelectedCity;
 import com.visittomm.mweather.utils.Utils;
 import com.visittomm.mweather.views.adapters.CityListAdapter;
@@ -58,27 +58,27 @@ public class CityListFragment extends Fragment {
     private void displayListView() {
 
         //Array list of countries
-        ArrayList<Country> countryList = new ArrayList<Country>();
-        Country country = new Country("Seoul",false);
-        countryList.add(country);
-        country = new Country("Yangon",false);
-        countryList.add(country);
-        country = new Country("Singapore",false);
-        countryList.add(country);
-        country = new Country("NewYork",false);
-        countryList.add(country);
-        country = new Country("Tokyo",false);
-        countryList.add(country);
-        country = new Country("Thailand",false);
-        countryList.add(country);
-        country = new Country("London",false);
-        countryList.add(country);
-        country = new Country("Karachi",false);
-        countryList.add(country);
-        country = new Country("Shanghai",false);
-        countryList.add(country);
-        country = new Country("Delhi",false);
-        countryList.add(country);
+        ArrayList<City> cityList = new ArrayList<City>();
+        City city = new City("Seoul",false);
+        cityList.add(city);
+        city = new City("Yangon",false);
+        cityList.add(city);
+        city = new City("Singapore",false);
+        cityList.add(city);
+        city = new City("NewYork",false);
+        cityList.add(city);
+        city = new City("Tokyo",false);
+        cityList.add(city);
+        city = new City("Thailand",false);
+        cityList.add(city);
+        city = new City("London",false);
+        cityList.add(city);
+        city = new City("Karachi",false);
+        cityList.add(city);
+        city = new City("Shanghai",false);
+        cityList.add(city);
+        city = new City("Delhi",false);
+        cityList.add(city);
 
         /**
          * Read selected cities object from json
@@ -97,19 +97,19 @@ public class CityListFragment extends Fragment {
         } catch (Exception exception) {
             Log.e(TAG, exception.getMessage());
         }
-        ArrayList<Country> countryList1 = countryList;
+        ArrayList<City> cityList1 = cityList;
         if (stringArrayList != null) { // no cities in cache
-            for(int i = 0; i < countryList1.size(); i++){
-                Country country1 = countryList1.get(i);
+            for(int i = 0; i < cityList1.size(); i++){
+                City city1 = cityList1.get(i);
 
-                if (stringArrayList.contains(country1.getName())) {
-                    country1.setSelected(true);
+                if (stringArrayList.contains(city1.getName())) {
+                    city1.setSelected(true);
                 }
             }
         }
 
         // create an ArrayAdaptar from the String Array
-        dataAdapter = new CityListAdapter(mContext, R.layout.city_list_item, countryList1);
+        dataAdapter = new CityListAdapter(mContext, R.layout.city_list_item, cityList1);
         ListView listView = (ListView) mView.findViewById(R.id.lvRecordListing);
         listView.setAdapter(dataAdapter);
     }
@@ -123,13 +123,13 @@ public class CityListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                ArrayList<Country> countryList = dataAdapter.countryList;
+                ArrayList<City> cityList = dataAdapter.cityList;
                 ArrayList<SelectedCity> selectedCityArrayList = new ArrayList<SelectedCity>();
 
-                for(int i=0; i<countryList.size(); i++){
-                    Country country = countryList.get(i);
-                    if(country.isSelected()){
-                        SelectedCity selectedCity = new SelectedCity(country.getName());
+                for(int i = 0; i< cityList.size(); i++){
+                    City city = cityList.get(i);
+                    if(city.isSelected()){
+                        SelectedCity selectedCity = new SelectedCity(city.getName());
                         selectedCityArrayList.add(selectedCity);
                     }
                 }

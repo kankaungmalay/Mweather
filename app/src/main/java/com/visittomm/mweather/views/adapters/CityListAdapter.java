@@ -9,21 +9,21 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import com.visittomm.mweather.R;
-import com.visittomm.mweather.models.Country;
+import com.visittomm.mweather.models.City;
 import java.util.ArrayList;
 
 /**
  * Created by monmon on 1/3/16.
  */
-public class CityListAdapter extends ArrayAdapter<Country> {
+public class CityListAdapter extends ArrayAdapter<City> {
 
-    public ArrayList<Country> countryList;
+    public ArrayList<City> cityList;
 
     public CityListAdapter(Context context, int textViewResourceId,
-                           ArrayList<Country> countryList) {
-        super(context, textViewResourceId, countryList);
-        this.countryList = new ArrayList<Country>();
-        this.countryList.addAll(countryList);
+                           ArrayList<City> cityList) {
+        super(context, textViewResourceId, cityList);
+        this.cityList = new ArrayList<City>();
+        this.cityList.addAll(cityList);
     }
 
     private class ViewHolder {
@@ -50,7 +50,7 @@ public class CityListAdapter extends ArrayAdapter<Country> {
             holder.name.setOnClickListener( new View.OnClickListener() {
                 public void onClick(View v) {
                     CheckBox cb = (CheckBox) v ;
-                    Country country = (Country) cb.getTag();
+                    City country = (City) cb.getTag();
                     country.setSelected(cb.isChecked());
                 }
             });
@@ -59,10 +59,10 @@ public class CityListAdapter extends ArrayAdapter<Country> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Country country = countryList.get(position);
-        holder.name.setText(country.getName());
-        holder.name.setChecked(country.isSelected());
-        holder.name.setTag(country);
+        City city = cityList.get(position);
+        holder.name.setText(city.getName());
+        holder.name.setChecked(city.isSelected());
+        holder.name.setTag(city);
 
         return convertView;
 
