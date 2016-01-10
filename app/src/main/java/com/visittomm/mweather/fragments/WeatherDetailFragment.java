@@ -86,7 +86,11 @@ public class WeatherDetailFragment extends Fragment {
                 imgView.setImageBitmap(img);
             }
 
-            // ((AppCompatActivity) mContext).getSupportActionBar().setTitle(weather.location.getCity());
+            // change toolbar title of current Fragment
+            Fragment f = getActivity().getFragmentManager().findFragmentById(R.id.fragment);
+            if (f instanceof WeatherDetailFragment)
+                ((AppCompatActivity) mContext).getSupportActionBar().setTitle(weather.location.getCity());
+
             cityText.setText(weather.location.getCity() + ", " + weather.location.getCountry());
             condDescr.setText(weather.currentCondition.getCondition() + "(" + weather.currentCondition.getDescr() + ")");
             temp.setText("" + Math.round((weather.temperature.getTemp() - 273.15)) + "\u00B0C");

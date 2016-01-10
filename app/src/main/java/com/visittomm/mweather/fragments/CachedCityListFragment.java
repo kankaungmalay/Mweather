@@ -3,6 +3,7 @@ package com.visittomm.mweather.fragments;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,12 @@ public class CachedCityListFragment extends Fragment {
 
         mView = inflater.inflate(R.layout.fragment_cached_city_list, container, false);
         mContext = this.getActivity();
+
+        // change toolbar title of current Fragment
+        Fragment f = getActivity().getFragmentManager().findFragmentById(R.id.fragment);
+        if (f instanceof CachedCityListFragment)
+            ((AppCompatActivity) mContext).getSupportActionBar().setTitle("Mweather");
+
         mListView = (ListView) mView.findViewById(R.id.lvCachedRecordListing);
 
         // Read selected cities object from cache

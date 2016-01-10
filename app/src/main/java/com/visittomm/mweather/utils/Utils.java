@@ -1,5 +1,11 @@
 package com.visittomm.mweather.utils;
 
+import android.app.Fragment;
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
+
+import com.visittomm.mweather.R;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;

@@ -3,6 +3,7 @@ package com.visittomm.mweather.fragments;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,11 @@ public class CityListFragment extends Fragment {
         mView = inflater.inflate(R.layout.fragment_main, container, false);
         mContext = this.getActivity();
 
+        // change toolbar title of current Fragment
+        Fragment f = getActivity().getFragmentManager().findFragmentById(R.id.fragment);
+        if (f instanceof CityListFragment)
+            ((AppCompatActivity) mContext).getSupportActionBar().setTitle("Mweather");
+
         displayListView();
         checkButtonClick();
 
@@ -57,7 +63,7 @@ public class CityListFragment extends Fragment {
 
     private void displayListView() {
 
-        //Array list of countries
+        //Array list of cities
         ArrayList<City> cityList = new ArrayList<City>();
         City city = new City("Seoul",false);
         cityList.add(city);
@@ -110,8 +116,8 @@ public class CityListFragment extends Fragment {
 
         // create an ArrayAdaptar from the String Array
         dataAdapter = new CityListAdapter(mContext, R.layout.city_list_item, cityList1);
-        ListView listView = (ListView) mView.findViewById(R.id.lvRecordListing);
-        listView.setAdapter(dataAdapter);
+        mListView = (ListView) mView.findViewById(R.id.lvRecordListing);
+        mListView.setAdapter(dataAdapter);
     }
 
     private void checkButtonClick() {
@@ -123,40 +129,40 @@ public class CityListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                ArrayList<City> cityList = dataAdapter.cityList;
-                ArrayList<SelectedCity> selectedCityArrayList = new ArrayList<SelectedCity>();
+            ArrayList<City> cityList = dataAdapter.cityList;
+            ArrayList<SelectedCity> selectedCityArrayList = new ArrayList<SelectedCity>();
 
-                for(int i = 0; i< cityList.size(); i++){
-                    City city = cityList.get(i);
-                    if(city.isSelected()){
-                        SelectedCity selectedCity = new SelectedCity(city.getName());
-                        selectedCityArrayList.add(selectedCity);
-                    }
+            for(int i = 0; i< cityList.size(); i++){
+                City city = cityList.get(i);
+                if(city.isSelected()){
+                    SelectedCity selectedCity = new SelectedCity(city.getName());
+                    selectedCityArrayList.add(selectedCity);
                 }
-                if (selectedCityArrayList.isEmpty()) {
-                    Toast.makeText(mContext.getApplicationContext(),
-                        "Please select a city for Weather Inof", Toast.LENGTH_LONG).show();
-                } else {
-                    // Write selected cities to disk as json
-                    Gson gson = new Gson ();
-                    byte[] jsonBytes = gson.toJson(selectedCityArrayList).getBytes();
+            }
+            if (selectedCityArrayList.isEmpty()) {
+                Toast.makeText(mContext.getApplicationContext(),
+                    "Please select a city for Weather Info", Toast.LENGTH_LONG).show();
+            } else {
+                // Write selected cities to disk as json
+                Gson gson = new Gson ();
+                byte[] jsonBytes = gson.toJson(selectedCityArrayList).getBytes();
 
-                    // save json file
-                    try {
-                        mContext.deleteFile(JSON_CACHE_FILE);
-                        FileOutputStream jsonCache = mContext.openFileOutput(JSON_CACHE_FILE, Context.MODE_PRIVATE);
-                        jsonCache.write(jsonBytes);
-                        jsonCache.flush();
-                        jsonCache.close();
-                    } catch (Exception exception) {
-                        Log.e(TAG, exception.getMessage());
-                        return;
-                    }
-
-                    CachedCityListFragment fragment = new CachedCityListFragment();
-                    FragmentListener fragmentListener = (FragmentListener) getActivity();
-                    fragmentListener.startMainFragment(fragment, true);
+                // save json file
+                try {
+                    mContext.deleteFile(JSON_CACHE_FILE);
+                    FileOutputStream jsonCache = mContext.openFileOutput(JSON_CACHE_FILE, Context.MODE_PRIVATE);
+                    jsonCache.write(jsonBytes);
+                    jsonCache.flush();
+                    jsonCache.close();
+                } catch (Exception exception) {
+                    Log.e(TAG, exception.getMessage());
+                    return;
                 }
+
+                CachedCityListFragment fragment = new CachedCityListFragment();
+                FragmentListener fragmentListener = (FragmentListener) getActivity();
+                fragmentListener.startMainFragment(fragment, true);
+            }
             }
         });
     }
