@@ -29,10 +29,10 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.mipmap.ic_back_arrow);
-        toolbar.setTitle("Mweather");
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        toolbar.setNavigationIcon(R.mipmap.ic_back_arrow);
+//        toolbar.setTitle("Mweather");
+//        setSupportActionBar(toolbar);
 
 
         // NOTED: Listen for changes in the back stack

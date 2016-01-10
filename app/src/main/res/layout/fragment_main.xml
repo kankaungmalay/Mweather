@@ -6,8 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".fragments.CityListFragment"
-    android:layout_marginTop="130dp">
+    tools:context=".fragments.CityListFragment">
 
     <LinearLayout
         android:layout_width="wrap_content"
