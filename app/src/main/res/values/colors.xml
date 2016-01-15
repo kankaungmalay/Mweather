@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#0288d1</color>
     <color name="colorAccent">#FF4081</color>
     <color name="toolBarColor">#09c</color>
+    <color name="colorWhite">#FFFFFF</color>
+
 
     <!-- basic colors -->
     <color name="gGreen">#3cba54</color>
