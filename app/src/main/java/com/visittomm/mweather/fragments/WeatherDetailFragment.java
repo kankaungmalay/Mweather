@@ -1,6 +1,7 @@
 package com.visittomm.mweather.fragments;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -33,7 +34,6 @@ public class WeatherDetailFragment extends Fragment {
     private TextView temp;
     String selectedCity;
 
-
     public WeatherDetailFragment() {
     }
 
@@ -62,6 +62,15 @@ public class WeatherDetailFragment extends Fragment {
 
     private class JSONWeatherTask extends AsyncTask<String, Void, Weather> {
 
+        ProgressDialog dialog = new ProgressDialog(mContext);
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.setMessage(getString(R.string.progress_loading));
+            dialog.show();
+        }
+
         @Override
         protected Weather doInBackground(String... params) {
             Weather weather = new Weather();
@@ -74,12 +83,12 @@ public class WeatherDetailFragment extends Fragment {
                 e.printStackTrace();
             }
             return weather;
-
         }
 
         @Override
         protected void onPostExecute(Weather weather) {
             super.onPostExecute(weather);
+            dialog.dismiss();
 
             if (weather.iconData != null && weather.iconData.length > 0) {
                 Bitmap img = BitmapFactory.decodeByteArray(weather.iconData, 0, weather.iconData.length);
@@ -95,5 +104,6 @@ public class WeatherDetailFragment extends Fragment {
             condDescr.setText(weather.currentCondition.getCondition() + "(" + weather.currentCondition.getDescr() + ")");
             temp.setText("" + Math.round((weather.temperature.getTemp() - 273.15)) + "\u00B0C");
         }
+
     }
 }
